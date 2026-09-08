@@ -1,0 +1,149 @@
+{
+  "site": {
+    "domain": "satloot.com",
+    "github": "q3579338",
+    "title": "satloot",
+    "tagline": "交易风控、链上实验、小游戏与工具，一个人做的一堆东西",
+    "taglineEn": "Trading tools, on-chain experiments, tiny games and utilities. Built by one person."
+  },
+  "sites": [
+    {
+      "host": "bnbbang.com",
+      "url": "https://bnbbang.com/",
+      "title": "BNBBANG 镜像宇宙",
+      "titleEn": "BNBBANG mirror universe",
+      "desc": "每个 BNB 区块哈希都是一个宇宙：免费引爆随便看，喜欢再铸成 NFT，一个哈希只铸一次。推导引擎与经济模型开源，任何人可复算并对链验证。",
+      "tag": "BNB Chain 主网",
+      "repos": [
+        "bnbbang-engine",
+        "bnbbang-economy"
+      ]
+    },
+    {
+      "host": "earn.satloot.com",
+      "url": "https://earn.satloot.com/",
+      "title": "riskdesk 风控面板",
+      "titleEn": "riskdesk · market scanner & risk desk",
+      "desc": "加密货币市场扫描与交易风控：异动雷达、相对强弱、资金费率、空投与新币投研、链上 meme 监控、交易纪律工具。注册即可看全部市场页。",
+      "tag": "免费注册"
+    },
+    {
+      "host": "sim.satloot.com",
+      "url": "https://sim.satloot.com/",
+      "title": "合约模拟器 Futures Trainer",
+      "titleEn": "Futures simulator",
+      "desc": "USDⓈ-M 永续合约模拟器：接真实行情、用模拟资金下单，逐仓/全仓、条件单、追踪委托，强平价按交易所公式算，还有交易行为分析。不涉及任何真实资金。",
+      "tag": "纯前端",
+      "repos": [
+        "futures-trainer"
+      ]
+    },
+    {
+      "host": "airdrop.satloot.com",
+      "url": "https://airdrop.satloot.com/",
+      "title": "空投雷达",
+      "titleEn": "Airdrop radar",
+      "desc": "进行中的加密空投项目一览：链、参与方式、阶段、热度证据与风险，按项目去重并标注首次发现日期，每 10 分钟同步。",
+      "tag": "每日更新",
+      "repos": [
+        "airdrop-site"
+      ]
+    },
+    {
+      "host": "game.satloot.com",
+      "url": "https://game.satloot.com/",
+      "title": "satloot 游戏厅",
+      "titleEn": "satloot arcade",
+      "desc": "GitHub 上的小游戏，全部单文件、零依赖、打开即玩：3D 跑酷、卡丁车、美食大冒险、俄罗斯方块、水果消消乐。",
+      "tag": "5 款游戏",
+      "repos": [
+        "gamehub"
+      ]
+    },
+    {
+      "host": "tool.satloot.com",
+      "url": "https://tool.satloot.com/",
+      "title": "satloot 工具站",
+      "titleEn": "satloot tools",
+      "desc": "客户端下载入口：行情、资金、监控与研究工具在 iOS、Android、Windows、macOS 保持同步。",
+      "tag": "客户端",
+      "repos": [
+        "satloot-tool"
+      ]
+    },
+    {
+      "host": "faucet.satloot.com",
+      "url": "https://faucet.satloot.com/",
+      "title": "比特币测试网水龙头",
+      "titleEn": "Bitcoin testnet3 faucet",
+      "desc": "自建 testnet3 水龙头：中英双语、工作量证明加九层防滥用、可自定领取额、链上出账实时可查。",
+      "tag": "testnet3",
+      "repos": [
+        "satloot-faucet"
+      ]
+    }
+  ],
+  "featuredRepos": [
+    "bnbbang-engine",
+    "bnbbang-economy",
+    "mirror-universe-engine",
+    "futures-trainer",
+    "earnfarm",
+    "satloot-faucet",
+    "short-killer",
+    "cpu-consensus-lab",
+    "autofish"
+  ],
+  "repoTitles": {
+    "bnbbang-engine": "BNBBANG 推导引擎",
+    "bnbbang-economy": "BNBBANG 经济模型与合约",
+    "mirror-universe-engine": "镜像宇宙引擎",
+    "futures-trainer": "合约模拟器 Futures Trainer",
+    "earnfarm": "资金费套利工具 earnfarm",
+    "satloot-faucet": "比特币测试网水龙头",
+    "short-killer": "空头杀手 Short Killer",
+    "cpu-consensus-lab": "CPU 共识实验室",
+    "autofish": "三角洲行动自动钓鱼",
+    "gamehub": "游戏厅站点工程",
+    "satloot-home": "satloot.com 总览页工程",
+    "airdrop-site": "空投雷达站点工程",
+    "satloot-tool": "工具站页面"
+  },
+  "excludeRepos": [
+    "test",
+    "test-1",
+    "bit-wallet"
+  ],
+  "private": [
+    {
+      "name": "riskdesk",
+      "desc": "earn.satloot.com 背后的市场扫描与风控引擎，Vite + Node 侧车。",
+      "site": "https://earn.satloot.com/"
+    },
+    {
+      "name": "realkline",
+      "desc": "逐笔成交拼出来的真实 K 线，不用交易所聚合线。"
+    },
+    {
+      "name": "mirror-universe",
+      "desc": "镜像宇宙模拟器：设定创世参数，引爆，走进那个宇宙看看。BNBBANG 的前身。",
+      "site": "https://bnbbang.com/"
+    },
+    {
+      "name": "lootchain",
+      "desc": "用 OP_RETURN 锚定到比特币的 PoW 链：NarrowNet PoW、抽样验证与实验性 race 共识。"
+    },
+    {
+      "name": "kr-volume-radar",
+      "desc": "Upbit / Bithumb 全市场放量扫描，每天两次，微信推送。"
+    },
+    {
+      "name": "tuanzi 系列",
+      "desc": "团子 3D 跑酷、卡丁车、美食大冒险、俄罗斯方块、水果消消乐，五个单文件游戏仓库。",
+      "site": "https://game.satloot.com/"
+    }
+  ],
+  "repoDesc": {
+    "bnbbang-economy": "BNBBANG 经济模型：代币分配、签名协议（v1 / v2，含真实验证向量）与加固后的合约源码。"
+  }
+}
