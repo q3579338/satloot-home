@@ -17,7 +17,23 @@
       "repos": [
         "bnbbang-engine",
         "bnbbang-economy"
-      ]
+      ],
+      "descEn": "Every BNB block hash is a universe: detonate for free and look around, mint the ones you like as NFTs, one mint per hash. The derivation engine and economic model are open source, so anyone can recompute and verify against the chain.",
+      "tagEn": "BNB Chain mainnet"
+    },
+    {
+      "host": "bang.satloot.com",
+      "url": "https://bang.satloot.com/",
+      "title": "BTCBANG 比特宇宙",
+      "titleEn": "BTCBANG Bitcoin universe",
+      "desc": "每个比特币主网区块都是一个宇宙：十分钟一个新哈希，免费引爆，满 6 个确认再铸。铸进 BNBBANG 同一个合约、发同一个 BANG，不发新币。",
+      "tag": "比特币主网 → BSC",
+      "repos": [
+        "bnbbang-engine",
+        "bnbbang-economy"
+      ],
+      "descEn": "Every Bitcoin mainnet block is a universe: a new hash every ten minutes, free to detonate, mintable after 6 confirmations. It mints into the same BNBBANG contract and pays the same BANG — no new token.",
+      "tagEn": "Bitcoin mainnet → BSC"
     },
     {
       "host": "earn.satloot.com",
@@ -25,7 +41,9 @@
       "title": "riskdesk 风控面板",
       "titleEn": "riskdesk · market scanner & risk desk",
       "desc": "加密货币市场扫描与交易风控：异动雷达、相对强弱、资金费率、空投与新币投研、链上 meme 监控、交易纪律工具。注册即可看全部市场页。",
-      "tag": "免费注册"
+      "tag": "免费注册",
+      "descEn": "Crypto market scanning and trading risk control: anomaly radar, relative strength, funding rates, airdrop and new-coin research, on-chain meme monitoring, trading-discipline tools. Sign up to see every market page.",
+      "tagEn": "Free sign-up"
     },
     {
       "host": "sim.satloot.com",
@@ -36,18 +54,22 @@
       "tag": "纯前端",
       "repos": [
         "futures-trainer"
-      ]
+      ],
+      "descEn": "USDⓈ-M perpetual futures simulator: live market data, paper money, isolated/cross margin, conditional and trailing orders, liquidation price by the exchange formula, plus trading-behavior analysis. No real funds involved.",
+      "tagEn": "Pure front-end"
     },
     {
       "host": "airdrop.satloot.com",
       "url": "https://airdrop.satloot.com/",
       "title": "空投雷达",
       "titleEn": "Airdrop radar",
-      "desc": "进行中的加密空投项目一览：链、参与方式、阶段、热度证据与风险，按项目去重并标注首次发现日期，每 10 分钟同步。",
+      "desc": "进行中的加密空投项目一览：链、参与方式、阶段、热度证据与风险，按项目去重并标注首次发现日期；另有 BTT 山寨板新帖与 AI 中文速览，每 5 分钟同步。",
       "tag": "每日更新",
       "repos": [
         "airdrop-site"
-      ]
+      ],
+      "descEn": "Ongoing crypto airdrops at a glance: chain, how to take part, stage, buzz evidence and risks, de-duplicated per project with first-seen dates. Plus new Bitcointalk altcoin announcements with AI summaries. Synced every 5 minutes.",
+      "tagEn": "Daily updates"
     },
     {
       "host": "game.satloot.com",
@@ -58,7 +80,9 @@
       "tag": "5 款游戏",
       "repos": [
         "gamehub"
-      ]
+      ],
+      "descEn": "Tiny games from GitHub, all single-file, zero-dependency, playable instantly: 3D runner, kart racing, food adventure, Tetris, fruit match-3.",
+      "tagEn": "5 games"
     },
     {
       "host": "tool.satloot.com",
@@ -69,7 +93,9 @@
       "tag": "客户端",
       "repos": [
         "satloot-tool"
-      ]
+      ],
+      "descEn": "Client download hub: market, funds, monitoring and research tools kept in sync across iOS, Android, Windows and macOS.",
+      "tagEn": "Clients"
     },
     {
       "host": "faucet.satloot.com",
@@ -80,7 +106,19 @@
       "tag": "testnet3",
       "repos": [
         "satloot-faucet"
-      ]
+      ],
+      "descEn": "Self-hosted testnet3 faucet: bilingual, proof-of-work plus nine anti-abuse layers, custom claim amounts, live on-chain payout feed.",
+      "tagEn": "testnet3"
+    },
+    {
+      "host": "trx.satloot.com",
+      "url": "https://trx.satloot.com/",
+      "title": "TRX 质押收益计算器",
+      "titleEn": "TRX staking yield calculator",
+      "desc": "自动读取搜狐能量频道最新能量 / 带宽收购价，叠加超级代表投票年化，四类产品每个档位的真实年化一表看全；TRX 实时价、链上押比、微信关口提醒，数字都能自己填。",
+      "descEn": "Reads the latest SOHU energy / bandwidth buy-back prices from Telegram, adds Super Representative vote APR, and shows the real yield of every tier; live TRX price, on-chain ratios, WeChat level alerts, every number editable.",
+      "tag": "TRON 质押",
+      "tagEn": "TRON staking"
     }
   ],
   "featuredRepos": [
@@ -112,38 +150,78 @@
   "excludeRepos": [
     "test",
     "test-1",
-    "bit-wallet"
+    "bit-wallet",
+    "iniminer",
+    "updateyourrqiner",
+    "eigenlayer-"
   ],
   "private": [
     {
       "name": "riskdesk",
       "desc": "earn.satloot.com 背后的市场扫描与风控引擎，Vite + Node 侧车。",
-      "site": "https://earn.satloot.com/"
+      "site": "https://earn.satloot.com/",
+      "descEn": "The market-scanning and risk engine behind earn.satloot.com, Vite + Node sidecar."
     },
     {
       "name": "realkline",
-      "desc": "逐笔成交拼出来的真实 K 线，不用交易所聚合线。"
+      "desc": "逐笔成交拼出来的真实 K 线，不用交易所聚合线。",
+      "descEn": "Real candles rebuilt from tick-by-tick trades instead of exchange-aggregated klines."
     },
     {
       "name": "mirror-universe",
       "desc": "镜像宇宙模拟器：设定创世参数，引爆，走进那个宇宙看看。BNBBANG 的前身。",
-      "site": "https://bnbbang.com/"
+      "site": "https://bnbbang.com/",
+      "descEn": "Mirror universe simulator: set genesis parameters, detonate, walk into that universe. The precursor of BNBBANG."
     },
     {
       "name": "lootchain",
-      "desc": "用 OP_RETURN 锚定到比特币的 PoW 链：NarrowNet PoW、抽样验证与实验性 race 共识。"
+      "desc": "用 OP_RETURN 锚定到比特币的 PoW 链：NarrowNet PoW、抽样验证与实验性 race 共识。",
+      "descEn": "A PoW chain anchored to Bitcoin via OP_RETURN: NarrowNet PoW, sampled verification and an experimental race consensus."
     },
     {
       "name": "kr-volume-radar",
-      "desc": "Upbit / Bithumb 全市场放量扫描，每天两次，微信推送。"
+      "desc": "Upbit / Bithumb 全市场放量扫描，每天两次，微信推送。",
+      "descEn": "Full-market volume-surge scan on Upbit / Bithumb, twice a day, pushed to WeChat."
     },
     {
       "name": "tuanzi 系列",
       "desc": "团子 3D 跑酷、卡丁车、美食大冒险、俄罗斯方块、水果消消乐，五个单文件游戏仓库。",
-      "site": "https://game.satloot.com/"
+      "site": "https://game.satloot.com/",
+      "descEn": "Tuanzi 3D runner, kart racing, food adventure, Tetris and fruit match-3: five single-file game repos.",
+      "nameEn": "tuanzi series"
     }
   ],
   "repoDesc": {
     "bnbbang-economy": "BNBBANG 经济模型：代币分配、签名协议（v1 / v2，含真实验证向量）与加固后的合约源码。"
+  },
+  "repoTitlesEn": {
+    "bnbbang-engine": "BNBBANG derivation engine",
+    "bnbbang-economy": "BNBBANG economics & contracts",
+    "mirror-universe-engine": "Mirror universe engine",
+    "futures-trainer": "Futures Trainer simulator",
+    "earnfarm": "earnfarm funding-rate arbitrage",
+    "satloot-faucet": "Bitcoin testnet faucet",
+    "short-killer": "Short Killer sentinel",
+    "cpu-consensus-lab": "CPU consensus lab",
+    "autofish": "Delta Force auto-fishing",
+    "gamehub": "Arcade site generator",
+    "satloot-home": "satloot.com overview page",
+    "airdrop-site": "Airdrop radar site",
+    "satloot-tool": "Tools landing page"
+  },
+  "repoDescEn": {
+    "futures-trainer": "Perpetual futures simulator: live market data plus paper money, with exchange-grade liquidation math and trading-behavior analysis.",
+    "satloot-tool": "Landing page for tool.satloot.com: single file, zero dependencies, inline SVG.",
+    "airdrop-site": "Static site for airdrop.satloot.com: regenerated every 5 minutes from the riskdesk sidecar and a Bitcointalk monitor.",
+    "satloot-home": "satloot.com overview page: links every live site, public GitHub repo and work in progress. Pure static generation.",
+    "gamehub": "game.satloot.com arcade: pulls single-file games from GitHub and generates a cover page plus /play/ shells. Pure static.",
+    "autofish": "Delta Force auto-fishing: listens for the bite sound, reads on-screen hints with OCR, clicks only when the game is in the foreground.",
+    "bnbbang-economy": "BNBBANG economics: token allocation, signature protocol (v1 / v2 with real test vectors) and the hardened contract source.",
+    "bnbbang-engine": "BNBBANG derivation engine: BNB block hash → physical constants of a universe. Anyone can recompute and verify against the chain (AGPL-3.0).",
+    "mirror-universe-engine": "Mirror universe engine: a zero-dependency JS physics kernel for cosmic evolution. Feed it a set of fundamental constants and it computes how that universe ends.",
+    "earnfarm": "Cross-exchange funding-rate arbitrage tool: net APR ranking, historical decay modeling, automatic retreat when a leg is left naked.",
+    "short-killer": "Binance futures open-restriction sentinel: watches for the moment trapped shorts get their door opened.",
+    "zhufengzhe": "Pitfall guide for Zhufengzhe.",
+    "-YY-": "WoW Classic: a list of scam raid-group YY channels."
   }
 }
