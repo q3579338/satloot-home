@@ -13,6 +13,11 @@ const S = M.site;
 const ORIGIN = `https://${S.domain}`;
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const ymd = iso => iso ? iso.slice(0, 10) : '';
+// meta description 控制在 80–160 字符：前缀 + 塞得下多少条目就多少 + 后缀
+const fit = (head, items, sep, tail, max = 158) => { const picked = []; for (const it of items) { if ((head + [...picked, it].join(sep) + tail).length > max) break; picked.push(it); } return head + picked.join(sep) + tail; };
+const OG_IMAGE = `${ORIGIN}/assets/og.png`;   // 1200×630，tools/make-og.mjs 生成，源文件在 assets/
+const LOGO_512 = `${ORIGIN}/assets/logo-512.png`;
+const THEME = '#f7f7fb';
 
 // ---- GitHub 公开仓库元数据（本机 gh 拉，缓存到 upstream/repos.json）----
 const cache = path.join(ROOT, 'upstream', 'repos.json');
@@ -60,7 +65,8 @@ const LOCALES = {
     about1: 'satloot 下面的东西大多围绕两件事：把加密交易里容易亏钱的环节做成工具（扫描、风控、纪律、模拟），以及一些纯粹好玩的实验（用区块哈希生成宇宙、单文件小游戏、CPU 友好的共识）。',
     about2: '所有站点都不收集个人数据，能开源的都开源。仓库有问题直接开 issue。',
     quickH: '直达', allRepos: '全部源码仓库',
-    metaDesc: (sites, n) => `${S.tagline}：${sites.join('、')}，以及 ${n} 个开源仓库。${S.taglineEn}`,
+    metaDesc: (sites, n) => fit(`${S.tagline}：`, sites, '、', `等 ${sites.length} 个在线站点，以及 ${n} 个开源仓库，全部自建自维护。`),
+    ogAlt: 'satloot 项目总览：在线站点与开源仓库',
     tagline: S.tagline, taglineAlt: S.taglineEn,
   },
   en: {
@@ -78,7 +84,8 @@ const LOCALES = {
     about1: 'Most things under satloot revolve around two ideas: turning the parts of crypto trading where people lose money into tools (scanning, risk control, discipline, simulation), and a few experiments that are purely for fun (universes generated from block hashes, single-file games, CPU-friendly consensus).',
     about2: 'None of the sites collect personal data, and everything that can be open source is. Found a problem? Open an issue on the repo.',
     quickH: 'Quick links', allRepos: 'all source repos',
-    metaDesc: (sites, n) => `${S.taglineEn}: ${sites.join(', ')}, plus ${n} open-source repos.`,
+    metaDesc: (sites, n) => fit(`${sites.length} live sites and ${n} open-source repos by one person — trading tools, on-chain experiments, tiny games and utilities: `, sites, ', ', ' and more.'),
+    ogAlt: 'satloot project index: live sites and open-source repos',
     tagline: S.taglineEn, taglineAlt: S.tagline,
   },
 };
@@ -116,9 +123,16 @@ function page(L) {
         <li>${p.site ? `<a href="${esc(p.site)}" rel="noopener">${esc(f(p, 'name'))}</a>` : `<b>${esc(f(p, 'name'))}</b>`}<span class="d">${esc(f(p, 'desc'))}</span><span class="meta">${p.site ? L.live : L.closed}</span></li>`;
 
   const url = `${ORIGIN}/${L.dir}`;
+  const title = `${S.title} · ${L.titleSuffix}`;
+  // 英文页 description 列域名（短），中文页列站点中文名
+  const desc = L.metaDesc(M.sites.map(s => en ? s.host : siteTitle(s)), repos.length);
   const jsonld = {
-    '@context': 'https://schema.org', '@type': 'WebSite', name: S.title, url, description: L.tagline, inLanguage: L.htmlLang,
-    author: { '@type': 'Person', name: S.github, url: `https://github.com/${S.github}` },
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'Organization', '@id': `${ORIGIN}/#org`, name: S.title, url: `${ORIGIN}/`, logo: { '@type': 'ImageObject', url: LOGO_512, width: 512, height: 512 }, sameAs: [`https://github.com/${S.github}`] },
+      { '@type': 'WebSite', '@id': `${ORIGIN}/#website`, name: S.title, url: `${ORIGIN}/`, description: L.tagline, inLanguage: L.htmlLang, publisher: { '@id': `${ORIGIN}/#org` } },
+      { '@type': 'CollectionPage', '@id': url, url, name: title, description: desc, inLanguage: L.htmlLang, isPartOf: { '@id': `${ORIGIN}/#website` }, about: { '@id': `${ORIGIN}/#org` }, primaryImageOfPage: { '@type': 'ImageObject', url: OG_IMAGE, width: 1200, height: 630 } },
+    ],
   };
 
   return `<!doctype html>
@@ -126,21 +140,32 @@ function page(L) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>${esc(S.title)} · ${L.titleSuffix}</title>
-<meta name="description" content="${esc(L.metaDesc(M.sites.map(siteTitle), repos.length))}">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${url}">
 <link rel="alternate" hreflang="zh-CN" href="${ORIGIN}/">
 <link rel="alternate" hreflang="en" href="${ORIGIN}/en/">
 <link rel="alternate" hreflang="x-default" href="${ORIGIN}/">
 <link rel="icon" href="${FAVICON}">
-<meta name="theme-color" content="#f7f7fb">
+<link rel="apple-touch-icon" href="/assets/logo-192.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="${THEME}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${esc(S.title)}">
-<meta property="og:title" content="${esc(S.title)} · ${L.titleSuffix}">
+<meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(L.tagline)}">
 <meta property="og:url" content="${url}">
+<meta property="og:image" content="${OG_IMAGE}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${esc(L.ogAlt)}">
 <meta property="og:locale" content="${en ? 'en_US' : 'zh_CN'}">
-<script type="application/ld+json">${JSON.stringify(jsonld)}</script>
+<meta property="og:locale:alternate" content="${en ? 'zh_CN' : 'en_US'}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(title)}">
+<meta name="twitter:description" content="${esc(L.tagline)}">
+<meta name="twitter:image" content="${OG_IMAGE}">
+<script type="application/ld+json">${JSON.stringify(jsonld).replace(/</g, '\\u003c')}</script>
 <style>
 /* 用户规矩(2026-09-08):所有站点浅色/白底,不做深色 */
 :root{--bg:#f7f7fb;--card:#ffffff;--card2:#f1f2f7;--line:rgba(15,23,42,.10);--line2:rgba(15,23,42,.22);
@@ -271,7 +296,14 @@ fs.writeFileSync(path.join(SITE, 'index.html'), zh.replace(/\. 这一页/, '。�
 fs.writeFileSync(path.join(SITE, 'en', 'index.html'), en);
 fs.writeFileSync(path.join(SITE, 'projects.json'), JSON.stringify({ site: S, sites: M.sites, repos: [...featured, ...rest], private: M.private, generated: new Date().toISOString() }, null, 2));
 fs.writeFileSync(path.join(SITE, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${ORIGIN}/sitemap.xml\n`);
+// 静态资源（og.png / logo-*.png，由 tools/make-og.mjs 生成）+ manifest
+fs.cpSync(path.join(ROOT, 'assets'), path.join(SITE, 'assets'), { recursive: true });
+fs.writeFileSync(path.join(SITE, 'manifest.json'), JSON.stringify({
+  name: S.title, short_name: S.title, description: S.taglineEn, lang: 'zh-CN', start_url: '/', scope: '/', display: 'browser',
+  background_color: THEME, theme_color: THEME,
+  icons: [{ src: '/assets/logo-192.png', sizes: '192x192', type: 'image/png' }, { src: '/assets/logo-512.png', sizes: '512x512', type: 'image/png' }],
+}, null, 2) + '\n');
 const today = new Date().toISOString().slice(0, 10);
-const alt = `<xhtml:link rel="alternate" hreflang="zh-CN" href="${ORIGIN}/"/><xhtml:link rel="alternate" hreflang="en" href="${ORIGIN}/en/"/>`;
+const alt = `<xhtml:link rel="alternate" hreflang="zh-CN" href="${ORIGIN}/"/><xhtml:link rel="alternate" hreflang="en" href="${ORIGIN}/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="${ORIGIN}/"/>`;
 fs.writeFileSync(path.join(SITE, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n  <url><loc>${ORIGIN}/</loc>${alt}<lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>\n  <url><loc>${ORIGIN}/en/</loc>${alt}<lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>\n</urlset>\n`);
 console.log(`built site/index.html (${(zh.length / 1024).toFixed(0)} KB) + site/en/index.html (${(en.length / 1024).toFixed(0)} KB): ${M.sites.length} 站点, ${featured.length} 精选仓库, ${rest.length} 其他仓库, ${M.private.length} 进行中`);
